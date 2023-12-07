@@ -21,7 +21,6 @@ class _HomeState extends State<Home> {
 
   final RegExp emailValid =
       RegExp(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$");
-  final RegExp passwordValid = RegExp(r"^psiconline12{1}[0-9]{1}$");
 
   @override
   Widget build(BuildContext context) {
@@ -86,26 +85,25 @@ class _HomeState extends State<Home> {
                         borderRadius: BorderRadius.circular(30),
                       ),
                       child: TextFormField(
-                        controller: _passwordController,
-                        obscureText: true,
-                        decoration: const InputDecoration(
-                          labelText: 'Escriba su contraseña',
-                          border: InputBorder.none,
-                          contentPadding: EdgeInsets.symmetric(
-                            vertical: 15,
-                            horizontal: 20,
-                          ),
+                      controller: _passwordController,
+                      obscureText: true,
+                      decoration: const InputDecoration(
+                        labelText: 'Escriba su contraseña',
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.symmetric(
+                          vertical: 15,
+                          horizontal: 20,
                         ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Este campo es requerido";
-                          } else if (!passwordValid.hasMatch(value)) {
-                            return "La contraseña debe tener al menos 8 caracteres y contener letras y números";
-                          }
-                          return null;
-                        },
                       ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Este campo es requerido";
+                        }
+                        return null;
+                      },
                     ),
+                  ),
+                    
                     Container(
                       width: 250,
                       decoration: BoxDecoration(
@@ -113,61 +111,48 @@ class _HomeState extends State<Home> {
                         borderRadius: BorderRadius.circular(30),
                       ),
                       child: TextButton(
-                        onPressed: () async {
-                          if (_signInKey.currentState!.validate()) {
-                            bool credencialesCorrectas = false;
-                            for (Usuario usuario in usuarios) {
-                              if (_emailController.text ==
-                                      usuario.nombreUsuario &&
-                                  _passwordController.text ==
-                                      usuario.contrasenia) {
-                                // El usuario está autenticado con éxito
-                                debugPrint("Correo: ${_emailController.text}");
-                                credencialesCorrectas = true;
-                                debugPrint("Usuario autenticado con éxito");
-                                break;
-                              }
-                            }
-                            if (!credencialesCorrectas) {
-                              final prefs =
-                                  await SharedPreferences.getInstance();
-                              await prefs.setBool('isAuthenticated', true);
-                              await prefs.setString(
-                                  'username', _emailController.text);
+                      onPressed: () async {
+                        if (_signInKey.currentState!.validate()) {
+                          bool credencialesCorrectas = false;
 
-                              String? username = prefs.getString('username');
+                          for (Usuario usuario in usuarios) {
 
-                              if (username != null) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text('¡Bienvenido, $username!'),
-                                  ),
-                                );
-                                // Redirigir a la página del cuestionario
-                                //Navigator.push(
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Cuestionario()),
-                                );
-                              }
-                            } else {
-                              // Si la autenticación falla, muestra un mensaje de error
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                      'Error de autenticación, revise contraseña o correo'),
-                                ),
-                              );
+                            /*print('Email ingresado: ${_emailController.text}');
+                            print('Contraseña ingresada: ${_passwordController.text}');
+                            print('Usuario almacenado: $emailAlmacenado');
+                            print('Contraseña almacenada: ${usuario.contrasenia}');*/
+
+                            if (_emailController.text == usuario.nombreUsuario &&
+                                _passwordController.text == usuario.contrasenia) {
+                              credencialesCorrectas = true;
+                              break;
                             }
                           }
-                        },
-                        child: const Text(
-                          "Iniciar Sesión",
-                          style: TextStyle(color: Colors.white, fontSize: 18),
-                        ),
+
+                          if (credencialesCorrectas) {
+                            // Las credenciales son correctas, puedes hacer lo que necesites aquí
+                            debugPrint("Usuario autenticado con éxito");
+                             Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => Cuestionario()),
+                            );
+                          } else {
+                            // Si la autenticación falla, muestra un mensaje de error
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Error de autenticación, revise contraseña o correo'),
+                              ),
+                            );
+                          }
+                        }
+                      },
+                      child: const Text(
+                        "Iniciar Sesión",
+                        style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                     ),
+                  ),
+
                     Container(
                         width: 250,
                         padding: EdgeInsets.all(16.0),

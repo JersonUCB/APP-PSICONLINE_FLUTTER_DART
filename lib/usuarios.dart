@@ -1,4 +1,5 @@
 
+
 class Usuario {
   final String nombreUsuario;
   final String contrasenia;
@@ -6,8 +7,7 @@ class Usuario {
   Usuario({required this.nombreUsuario, required this.contrasenia});
 }
    List<Usuario> usuarios = [
-    Usuario(nombreUsuario: 'nicoleuribe', contrasenia: 'psiconline121'),
-    Usuario(nombreUsuario: 'jersongarcia', contrasenia: 'psiconline122'),
-    Usuario(nombreUsuario: 'luissalazar', contrasenia: 'psiconline123'),
-    Usuario(nombreUsuario: 'haroldmuyba', contrasenia: 'psiconline124'),
+    Usuario(nombreUsuario: 'nicoleuribe@gmail.com', contrasenia: 'psiconline121'),
+    Usuario(nombreUsuario: 'jersongarcia@gmail.com', contrasenia: 'psiconline122'),
+    Usuario(nombreUsuario: 'luissalazar@gmail.com', contrasenia: 'psiconline123'),
   ];
