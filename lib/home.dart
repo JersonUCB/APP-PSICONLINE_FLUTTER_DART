@@ -40,6 +40,7 @@ class _HomeState extends State<Home> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    SizedBox(height: 50),
                     Image.asset(
                       'assets/psiconline.jpg',
                       height: 200,
@@ -132,7 +133,7 @@ class _HomeState extends State<Home> {
                           if (credencialesCorrectas) {
                             // Las credenciales son correctas, puedes hacer lo que necesites aquí
                             debugPrint("Usuario autenticado con éxito");
-                             Navigator.push(
+                            Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(builder: (context) => Cuestionario()),
                             );
