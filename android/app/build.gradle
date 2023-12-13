@@ -20,11 +20,11 @@ if (flutterVersionCode == null) {
 
 def flutterVersionName = localProperties.getProperty('flutter.versionName')
 if (flutterVersionName == null) {
-    flutterVersionName = '1.0'
+    flutterVersionName = '1.1'
 }
 
 android {
-    namespace "com.example.proyecto_psiconline_mobile"
+    namespace "com.proyecto_psiconline_mobile"
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
@@ -43,20 +43,28 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.example.proyecto_psiconline_mobile"
+        applicationId "com.proyecto_psiconline_mobile"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdkVersion flutter.minSdkVersion
         targetSdkVersion flutter.targetSdkVersion
-        versionCode flutterVersionCode.toInteger()
+        //versionCode flutterVersionCode.toInteger()
+        versionCode 2
         versionName flutterVersionName
     }
-
+    signingConfigs {
+        release {
+            keyAlias 'key'
+            keyPassword 'equipoUnido' // Reemplaza con la contraseña que ingresaste al generar la clave
+            storeFile file('Key/key.jks') // Reemplaza con la ubicación de tu archivo de clave
+            storePassword 'equipoUnido' // Reemplaza con la contraseña que ingresaste al generar la clave
+        }
+    }
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
             crunchPngs false
         }
     }
