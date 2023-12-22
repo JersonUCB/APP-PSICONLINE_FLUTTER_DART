@@ -59,7 +59,7 @@ class _RegistroUsuarioState extends State<RegistroUsuario> {
               Row(
                 children: [
                   Container(
-                    width: 420,
+                    width: 210,
                     margin: const EdgeInsets.all(15),
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     decoration: BoxDecoration(
@@ -79,7 +79,7 @@ class _RegistroUsuarioState extends State<RegistroUsuario> {
                     ),
                   ),
                   Container(
-                    width: 100,
+                    width: 130,
                     child: Text(
                       '@gmail.com',
                       style: TextStyle(
